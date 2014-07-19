@@ -1,5 +1,4 @@
-music
-=====
+shuffle
 
 a music recommendation tool
 
