@@ -1,6 +1,7 @@
 shuffle
 
-a music recommendation tool
+Description: a music recommendation tool
 
+Author：zf，dt，fj 
 
-author：zf，dt，fj 
+Start Time:20140719
