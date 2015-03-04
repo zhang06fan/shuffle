@@ -27,8 +27,9 @@ def fetch_tag():
     pass
 
 def cluster(filename, audio):
-    artist_dir = audio.tag.artist
+    artist_dir = os.path.dirname(filename) + "/" + audio.tag.artist
     album_dir = artist_dir + "/" + audio.tag.album
+    print album_dir
     if not os.path.exists(album_dir):
         os.makedirs(album_dir)
     shutil.move(filename, album_dir)
@@ -38,13 +39,15 @@ def scan_dir(path):
     for lists in os.listdir(path):
         tmp = os.path.join(path, lists)
         if os.path.isdir(tmp):
-            scan_dir(tmp)
+            #scan_dir(tmp)
+            pass
         else:
-            if not cmp(os.path.splitext(tmp)[1], ".mp3"):
-                #print tmp, os.path.splitext(tmp)[1]
-                insert_metadata(tmp)
+            if not cmp(os.path.splitext(tmp)[1].lower(), ".mp3"):
+                print tmp
+                audio_file = eyed3.load(tmp)
+                cluster(tmp, audio_file)
 
 if __name__ == "__main__":
     #print os.environ.get("HOME")
-    scan_dir(os.environ.get("HOME") + "/Music")
+    scan_dir(os.environ.get("HOME") + "/Music/test")
 
