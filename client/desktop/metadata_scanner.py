@@ -5,6 +5,7 @@ import os
 import shutil
 import sys
 import eyed3
+from fetch_tag import *
 
 # TODO: eyed3 can only resolve mp3 mutagen will be used in the future
 #suffix = [".mp3", ".flac", ".ape", ".wma"]
@@ -33,6 +34,9 @@ def cluster(filename, audio):
     if not os.path.exists(album_dir):
         os.makedirs(album_dir)
     shutil.move(filename, album_dir)
+    img_data = search(audio)
+    if img_data:
+        image_save(img_data, album_dir + "/" + audio.tag.album + ".jpg")
 
 def scan_dir(path):
     """This method is used to travel directories and cluster songs by tag"""
